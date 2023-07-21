@@ -1,0 +1,40 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')->create();
+$productCollection->addAttributeToSelect('*');
+$productCollection->setPageSize(10);
+?> <!-- aqui nos criamos uma collection de produtos com o objectManager-->
+<div class="custom-product-slider"> ?> 
+    <ul class="slider-items"><!-- no html abaixo estamos interagindo com cada produto da collection-->
+        <?php foreach ($productCollection as $product): ?> 
+            <?php $_product = $objectManager->create('Magento\Catalog\Model\Product')->load($product->getId()); ?>
+            <li class="item">
+                <div class="product-item">
+                    <div class="product-image">
+                        <a href="<?= $_product->getProductUrl() ?>">
+                            <img src="<?= $block->escapeUrl($_product->getImageUrl()) ?>" alt="<?= $block->escapeHtml($_product->getName()) ?>" />
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <strong class="product-name">
+                            <a href="<?= $_product->getProductUrl() ?>">
+                                <?= $block->escapeHtml($_product->getName()) ?>
+                            </a>
+                        </strong>
+                        <div class="product-price">
+                            <?= $block->escapeHtml($_product->getPriceInfo()->getPrice('final_price')->getMinimalPrice()->getValue()) ?>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<!-- no script abaixo estamos chamando o js para realizar a ação de carousel-->
+<script type="text/x-magento-init">
+    {
+        ".custom-product-slider .slider-items" : {
+            "Magento_Cms/js/product_slider": {}
+        }
+    }
+</script>

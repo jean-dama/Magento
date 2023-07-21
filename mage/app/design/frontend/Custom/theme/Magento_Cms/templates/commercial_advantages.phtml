@@ -1,0 +1,9 @@
+<!-- neste script estamos chamando o bloco CMS criado no painel admin-->
+<div>
+    <?php
+        echo $this->getLayout()
+        ->createBlock('Magento\Cms\Block\Block')
+        ->setBlockId('advantage-banners')
+        ->toHtml();
+    ?>
+</div>

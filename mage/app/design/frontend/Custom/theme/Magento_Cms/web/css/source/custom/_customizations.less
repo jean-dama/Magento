@@ -1,0 +1,52 @@
+// Css utilizado tanto para mobile quanto para desktop (_styles.css) - common
+//  ---------------------------------------------
+& when (@media-common =true) {
+    .cms-page-view {
+        .page-wrapper {
+            #maincontent {
+                .column {
+                    &.main {
+                        .custom_advantages {
+                            display: flex;
+                            justify-content: center;
+                            width: max-content;
+                            margin-left: -13%;
+                            .custom_images {
+                                height: 200px; 
+                                width: 400px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+// Css utilizado somente para desktop (styles-l.css) - Desktop
+//  ---------------------------------------------
+& when (@media-target ='desktop') {
+
+    // DESKTOP entre 769px e o tamanho maximo do layout //
+    @media only screen and (min-width: @screen__m) and (max-width: @layout__max-width) {}
+
+    // Maior que 1024px
+    @media (max-width: @screen__l) {}
+
+}
+
+//
+// Css utilizado somente para mobile (styles-m.css) - Mobile
+//  ---------------------------------------------
+& when (@media-target ='mobile') {
+
+    // Menor que 1024px
+    @media (max-width: @screen__l) {}
+
+    // Menor que 769px
+    @media (max-width: @screen__m) {}
+
+    // Menor que 375px
+    @media (max-width: @screen__xs) {}
+}
